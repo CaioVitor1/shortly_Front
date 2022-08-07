@@ -3,6 +3,9 @@ import axios from 'axios';
 import short from "../assets/short.png";
 import trophy from "../assets/trophy.png"
 import { useState, useEffect } from 'react';
+import { Link,  useNavigate } from 'react-router-dom';
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
 
 function RenderList({index, name, visitcount, linkscount}) {
     return (
@@ -11,6 +14,8 @@ function RenderList({index, name, visitcount, linkscount}) {
 }
 
 export default function InitialPage() {
+    const { user, setUser } = useContext(UserContext);
+    console.log(user)
     const [ranking, setRanking] = useState([])
 
   useEffect(() => {
@@ -32,8 +37,9 @@ export default function InitialPage() {
     return (
         <div className='initialPage'>
             <div className='topo'>
-                <h3>Entrar</h3>
-                <h4>Cadastrar</h4>
+                <Link style={{ textDecoration: 'none' }} to={`/signin`} ><h3>Entrar</h3></Link>
+                <Link style={{ textDecoration: 'none' }} to={`/signup`} > <h4>Cadastrar</h4></Link>
+
             </div>
             <div className='mainContent'>
                 <div className='title'>
