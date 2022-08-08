@@ -19,7 +19,7 @@ export default function SignIn() {
                 email: email,
                 password: password
             }
-            const promise = axios.post("http://localhost:4000/signin", body);
+            const promise = axios.post("https://shortly-project-16.herokuapp.com/signin", body);
             promise
             .then(res =>{
                 console.log("deu bom");
@@ -40,23 +40,22 @@ export default function SignIn() {
 
 return (
     <BodySignIn>
-        <div className='initialPage'>
-            <div className='topo'>
+        <InitialPageBody>
+            <Topo>
                 <Link style={{ textDecoration: 'none' }} to={`/signin`} ><h3>Entrar</h3></Link>
                 <Link style={{ textDecoration: 'none' }} to={`/signup`} > <h4>Cadastrar</h4></Link>
-            </div>
-            <div className='mainContent'>
-                <div className='title'>
+            </Topo>
+            
+                <Title>
                     <h2> Shortly</h2>
                     <img src={short} />
-                </div>
-            </div>
-        </div>
-
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-        <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Senha" />
-        <button onClick={logInto}> Entrar</button> 
-</BodySignIn>
+                </Title>
+            
+        </InitialPageBody>
+            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Senha" />
+            <button onClick={logInto}> Entrar</button> 
+    </BodySignIn>
 )
 
 
@@ -100,4 +99,56 @@ button {
     color: #FFFFFF;
 }
 
+`
+
+const InitialPageBody = styled.div `
+background-color: #FFFFFF;
+width: 900px;
+margin: 0 auto;
+box-sizing: border-box;
+font-family: 'Lexend Deca', sans-serif;
+margin-bottom: 60px;
+`
+
+const Topo = styled.div`
+display: flex;
+justify-content: flex-end;
+margin-right: 20px;
+h3{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #5D9040;  
+    margin-right: 20px;
+}
+h4{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #9C9C9C;   
+    margin-right: 20px;
+}
+`
+
+const Title = styled.div`
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h2{
+        font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 64px;
+    line-height: 80px;
+    color: #000000;
+    }
+    img{
+        Width:102px;
+    Height: 96px;
+    }
 `

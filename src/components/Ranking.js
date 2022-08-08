@@ -1,11 +1,13 @@
-import styled from 'styled-components';
-import axios from 'axios';
-import short from "../assets/short.png";
-import trophy from "../assets/trophy.png"
-import { useState, useEffect } from 'react';
+import styled from "styled-components";
+import react from "react";
 import { Link,  useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import UserContext from "../context/UserContext";
 import { useContext } from "react";
+import short from "../assets/short.png";
+import trophy from "../assets/trophy.png"
+
 
 function RenderList({index, name, visitcount, linkscount}) {
     return (
@@ -13,8 +15,9 @@ function RenderList({index, name, visitcount, linkscount}) {
     )
 }
 
-export default function InitialPage() {
+export default function Ranking() {
     const { user, setUser } = useContext(UserContext);
+    const { nameUser, setNameUser } = useContext(UserContext);
     console.log(user)
     const [ranking, setRanking] = useState([])
 
@@ -37,17 +40,21 @@ export default function InitialPage() {
 
     return (
         <InitialPageBody>
-            <Topo>
-                <Link style={{ textDecoration: 'none' }} to={`/signin`} ><h3>Entrar</h3></Link>
-                <Link style={{ textDecoration: 'none' }} to={`/signup`} > <h4>Cadastrar</h4></Link>
-
-            </Topo>
-            
+            <TopoMain>
+               
+                    <h4> Seja bem vindo, {nameUser}</h4>
+                
+                <Right>
+                    <Link style={{ textDecoration: 'none' }} to={`/main`} ><h3>HOME</h3></Link>
+                    <Link style={{ textDecoration: 'none' }} to={`/ranking`} > <h3>Ranking</h3></Link>
+                    <Link style={{ textDecoration: 'none' }} to={`/`} > <h3>Sair</h3></Link>
+                </Right>
+            </TopoMain>
                 <Title>
                     <h2> Shortly</h2>
                     <img src={short} />
                 </Title>
-               
+              
                     <RankingTitle>
                         <img src={trophy} />
                         <h3> Ranking</h3>
@@ -55,11 +62,8 @@ export default function InitialPage() {
                     <RankingList>
                         {ranking.map((data, index) => <RenderList index={index} name={data.name} linkscount={data.linkscount} visitcount={data.visitcount} />)}
                     </RankingList>
-                
+               
             
-            <Footer>
-                <h3> Crie sua conta para usar nossos serviços</h3>
-            </Footer>
         </InitialPageBody>
     )
 }
@@ -73,28 +77,32 @@ font-family: 'Lexend Deca', sans-serif;
 margin-bottom: 60px;
 `
 
-const Topo = styled.div`
-display: flex;
-justify-content: flex-end;
-margin-right: 20px;
-h3{
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    color: #5D9040;  
+const TopoMain = styled.div`
+    display: flex;
+    justify-content: space-between;
     margin-right: 20px;
-}
-h4{
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    color: #9C9C9C;   
-    margin-right: 20px;
-}
+
+    h4 {
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #5D9040;
+    }
+    h3{
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #9C9C9C;   
+        margin-right: 20px; 
+    }
+`
+
+const Right = styled.div`
+display:flex;
 `
 
 const Title = styled.div`
@@ -134,22 +142,6 @@ const RankingTitle = styled.div`
     img{
         width: 55px;
         height: 55px;
-    }
-`
-
-const Footer = styled.div`
-    margin-top: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    h3{
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 36px;
-        line-height: 45px;
-        color: #000000;
     }
 `
 
